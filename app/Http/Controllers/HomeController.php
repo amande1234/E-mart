@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\product;
 use  Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -15,10 +17,22 @@ class HomeController extends Controller
             return view('admin.home');
         }
         else{
-            return view('home.userpage');
+            $products=product::paginate(2);
+            return view('home.userpage',['products'=>$products]);
         }
     }
-    public function index(){
-            return view('home.userpage');
+    public function index(Request $request){
+        $products=product::paginate(2);
+        return view('home.userpage', ['products'=>$products]);
+
+    }
+
+    public function product_details(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $category = Category::find($product->category);
+
+        return view('home.products_details', ['product' => $product, 'category' => $category]);
     }
 }
+  

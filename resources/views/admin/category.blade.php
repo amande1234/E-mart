@@ -99,12 +99,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="pagination">
-
-                        </div>
+                        
                     </div>
 
-
+                    <div class="pagination">
+                        {{ $category_list->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
             </div>
             <!-- content-wrapper ends -->
